@@ -1,0 +1,45 @@
+{% extends 'baza.html' %}
+{% load static %}
+{% block title %}
+Istoric comenzi
+{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <br>
+    <h1 class="text-center product_title">
+      Istoric comenzi
+    </h1>
+    <br>
+    {% if detalii_comanda %}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Numarul comenzii</th>
+            <th>Data si ora comenzii</th>
+            <th>Suma totala</th>
+            <th>Status comanda</th>
+            <th>Detalii comanda</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comanda in detalii_comanda %}
+            <tr>
+              <td>{{ comanda.id }}</td>
+              <td>{{ comanda.creata }}</td>
+              <td>{{ comanda.total }}</td>
+              <td>Confirmata &nbsp;<i class="fas fa-check"></i></td>
+              <td><a href="{% url 'detaliiComanda' comanda.id %}">Vezi comanda</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Momentan nu ati plasat nici o comanda.
+        <br><br>
+        <a href="{% url 'acasa' %}" class="btn btn-secondary">Continuati cumparaturile</a>
+      </p>
+    {% endif %}
+  </div>
+  <br><br>
+{% endblock %}

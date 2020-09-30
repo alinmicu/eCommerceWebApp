@@ -1,0 +1,72 @@
+{% extends 'baza.html' %}
+{% load static %}
+{% block title %}
+Produs
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row mt-5">
+    <div class="col-10 mx-auto col-md-6 my-3">
+      <img src="{{produs.imagine.url}}" alt="">
+    </div>
+    <div class="col-10 mx-auto col-md-6 my-3">
+      <div>
+        <h1 class="titlu_produs">{{produs.nume}}</h1>
+        <h5 class="text-info font-italic mb-3"><span class="mr-1">lei</span>{{produs.pret}}</h5>
+        <p class="descriere_produs">Descrierea Produsului</p>
+        <p class="text-justify text_produs">{{produs.descriere}}</p>
+        {% if produs.stoc <= 0 %}
+        <p class="text-justify product_text"><b>Stoc epuizat</b></p>
+        {% else %}
+        <a href="{% url 'adauga_cos' produs.id %}">
+          <button type="button" name="button" class="btn btn-secondary">Adauga in cos</button>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+  <br><br>
+  <br><br>
+
+  <div class="card border-dark mb-3">
+    <div class="card-header border-dark mb-3">
+      <h5>Adauga o recenzie</h5>
+    </div>
+    {% if not user.is_authenticated %}
+    <div>
+        <p class = 'text-info'>&nbsp;&nbsp;&nbsp;&nbsp;Pentru a scrie o recenzie, trebuie sa fiti autentificati in contul dumneavoastra. Daca nu aveti cont dati click <a href="{% url 'inregistrare' %}">aici.</a></p>
+    </div>
+    {% else %}
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <textarea name="mesaj_recenzie" class="form-control"></textarea>
+        </div>
+        <div class="form-group ">
+        <button type="submit" class="btn btn-secondary">Adauga</button>
+        </div>
+      </form>
+    </div>
+    {% endif %}
+
+    {% if recenzii.count > 0 %}
+    <div class="card-body">
+       {% for recenzie in recenzii %}
+
+      <div class="card-header card-footer border-dark">
+      <p class="card-text"><h6>{{ recenzie.utilizator.username }}</h6></p>
+      <p class="card-text">{{ recenzie.mesaj_recenzie }}</p>
+      </div>
+
+      {% endfor %}
+      
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

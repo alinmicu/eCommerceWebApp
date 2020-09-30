@@ -1,0 +1,49 @@
+{% extends 'baza.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Magazin Online
+{% endblock %}
+
+{% block content %}
+
+{% if not formular.is_valid %}
+      <div class="mx-auto">
+        <br>
+        <h1 class="text-center titlu_produs">
+          Cont nou
+        </h1>
+        <br>
+        <div class="col-lg-5 mx-auto bg-light">
+          <br>
+          <p>Introduceti urmatoarele informatii pt. a crea un nou cont</p>
+          <form method="post">
+            {% csrf_token %}
+            <p>{{ formular | crispy }}</p>
+            <button type="submit" name="button" class="btn btn-secondary">Inregistreaza-te</button>
+          </form>
+          <br>
+        </div>
+      </div>
+{% else %}
+      <div class="mx-auto">
+        <br>
+        <h1 class="text-center titlu_produs">
+          Contul dumneavoastra a fost creat cu succes
+        </h1>
+        <br>
+        <div class="container">
+            <p>
+              <br>
+              Contul dumneavoastra a fost creat si este gata pt. utilizare.
+              <br>
+              <br>
+              <a href="{% url 'acasa' %}">Continuati cumparaturile</a>
+            </p>
+        </div>
+      </div>
+
+{% endif %}
+
+
+{% endblock %}

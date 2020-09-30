@@ -1,0 +1,74 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-md navbar-light "  style="color: #D81921;">
+<a class="logo" href="/"><img  src="{% static 'imagini/logo.png' %}"></a>
+
+  <button type="button" class="navbar-toggler bg-light" data-toggle="collapse"
+  data-target="#nav" name="button"><span class="navbar-toggler-icon"></span></button>
+
+  <div class="collapse navbar-collapse justify-content-between" id="nav">
+  <ul class="navbar-nav baranav_centru">
+    <li class="nav-item dropdown" ><a class="nav-link text-light text-uppercase font-weight-bold px-4 dropdown-toggle titlu_barnav"
+      href="" data-toggle="dropdown">Categorii</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'acasa' %}">Toate brandurile</a>
+        {% for categorie in linkuri %}
+        <a class="dropdown-item" href="{{categorie.get_url}}">{{categorie.nume}}</a>
+        {% endfor %}
+      </div>
+    </li>
+    <li class="nav-item" ><a class="nav-link text-light text-uppercase font-weight-bold px-4 titlu_barnav" href="{% url 'contact' %}">
+      Contact</a></li>
+    <li class="nav-item" ><a class="nav-link text-light text-uppercase font-weight-bold px-4 titlu_barnav" href="{% url 'despreNoi' %}">
+      Despre noi</a></li>
+
+      {% if request.user.is_authenticated and request.user.first_name %}
+      <li class="nav-item dropdown" >
+        <a class="nav-link text-light text-uppercase font-weight-bold px-4 dropdown-toggle titlu_barnav" data-toggle="dropdown">
+          Bun venit, {{ request.user.first_name }}
+          <i class="fas fa-user" style="color:#343a40"></i></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'istoric' %}">Istoric comenzi</a>
+
+          </div>
+      </li>
+
+      <li class="nav-item" >
+        <a class="nav-link text-light text-uppercase font-weight-bold px-4 titlu_barnav" href="{% url 'deconectare' %}">
+          Iesire din cont
+          <i class="fas fa-sign-out-alt" style="color:#343a40"></i></a>
+      </li>
+
+      {% else %}
+
+      <li class="nav-item" >
+        <a class="nav-link text-light text-uppercase font-weight-bold px-4 titlu_barnav" href="{% url 'inregistrare' %}">
+          Inregistrati-va
+          <i class="fas fa-user-plus" style="color:#343a40"></i></a>
+      </li>
+
+      <li class="nav-item" >
+        <a class="nav-link text-light text-uppercase font-weight-bold px-4 titlu_barnav" href="{% url 'autentificare' %}">
+          Autentificati-va
+          <i class="fas fa-sign-in-alt" style="color:#343a40"></i></a>
+      </li>
+
+      {% endif %}
+
+      {% if contor_obiecte > 0 %}
+    <li class="nav-item" ><a class="nav-link text-light text-uppercase font-weight-bold px-4" href="{% url 'detalii_cos' %}">
+      <i class="fas fa-shopping-cart" style="color:#343a40"></i>({{contor_obiecte}})
+    </a></li>
+    {% endif %}
+  </ul>
+
+  <form class="from-inline ml-4" action="{% url 'cautare' %} ",  method="GET">
+    <div class="input-group">
+      <input type="text" class="form-control" name="nume_produs" placeholder="Cautare">
+      <div class="input-group-append">
+        <button name="button" type="submit"  class="btn btn-dark"><i class="fas fa-search" style="color:white"></i></button>
+      </div>
+    </div>
+  </form>
+ </div>
+</nav>

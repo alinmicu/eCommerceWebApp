@@ -1,0 +1,36 @@
+{% extends 'baza.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Contacteaza-ne
+{% endblock %}
+
+{% block content %}
+
+ <div class="container">
+  <h1>Contact</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ formular | crispy }}
+
+    <button type="submit" class="text-white btn btn-lg bg-dark btn-block">Trimite</button>
+    <br><br><br>
+  </form>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.2006506443377!2d21.
+22942651596151!3d45.74712322254048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4745
+5d84610655bf%3A0xfd169ff24d29f192!2sUniversitatea%20de%20Vest%20din%20Timi%C8%99oara!5e0!3m
+2!1sro!2sro!4v1598809390580!5m2!1sro!2sro" width="600" height="450" frameborder="1"
+style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+<div class="float-right">
+  <p>Adresa magazinului: Str. Testului nr.43</p>
+  <p>123456, Timișoara, jud. Timiș</p>
+  <p>Număr de telefon: +40707070707</p>
+  <p>FAX: +40777777777</p>
+  <p>Adresa e-mail comenzi: comenzi@testmagazinonline.site</p>
+  <p>Adresa e-mail service: service@testmagazinonline.site</p>
+  <p>Adresa e-mail plangeri: plangeri@testmagazinonline.site</p>
+</div>
+
+</div>
+
+{% endblock %}

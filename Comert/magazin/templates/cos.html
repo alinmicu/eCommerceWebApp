@@ -1,0 +1,120 @@
+{% extends 'baza.html' %}
+{% load static %}
+{% block title %}
+Cos
+{% endblock %}
+
+{% block content %}
+  {% if not obiecte_cos %}
+    <div class="text-center">
+      <br>
+      <h1 clas=text-center titlu_produs>
+        Cosul dumneavoastra este gol
+      </h1>
+      <br>
+      <p class=text-center>
+        Dati click <a href="{% url 'acasa' %}">aici</a> pentru a continua cumparaturile
+      </p>
+    </div>
+  {% else %}
+
+<div class="text-center">
+  <br>
+  <div class="text-center titlu_produs">
+    Cosul dumneavoastra de cumparaturi
+  </div>
+</div>
+<div class="mx-auto row">
+  <div class="text-center col-lg-6">
+    <table class="table tabel_cos">
+      <thead class="thead_cos">
+        <tr>
+          <th colspan="4">
+            Cumparaturile dumneavoastra
+          </th>
+        </tr>
+      </thead>
+      {% for obiect_cos in obiecte_cos %}
+      <tr>
+        <td>
+          <img src="{{obiect_cos.produs.imagine.url}}" width="100" height="100" alt="">
+        </td>
+        <td class = "text-left">
+            {{obiect_cos.produs.nume}}
+            <br>
+            STOC: {{obiect_cos.produs.stoc}}
+            <br>
+            Pret: {{obiect_cos.produs.pret}} lei
+            <br>
+            Cantitate: {{obiect_cos.cantitate}} x {{obiect_cos.produs.pret}} lei
+        </td>
+        <td>
+          {{obiect_cos.subtotal}} lei
+        </td>
+        {% if obiect_cos.cantitate < obiect_cos.produs.stoc %}
+        <td>
+          <a href="{% url 'adauga_cos' obiect_cos.produs.id %}"><i class="fas fa-plus-square" style="color:#343A40"></i></a>
+          <br><a href="{% url 'elimina_produs' obiect_cos.produs.id %}"><i class="fas fa-minus-square" style="color:#343A40"></i></a>
+          <br><a href="{% url 'sterge_produs' obiect_cos.produs.id %}"><i class="fas fa-trash" style="color:#343A40"></i></a>
+        </td>
+        {% else %}
+        <td>
+          <br><a href="{% url 'elimina_produs' obiect_cos.produs.id %}"><i class="fas fa-minus-square" style="color:#343A40"></i></a>
+          <br><a href="{% url 'sterge_produs' obiect_cos.produs.id %}"><i class="fas fa-trash" style="color:#343A40"></i></a>
+        </td>
+        {% endif %}
+
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+
+  <div class="text-center col-lg-6">
+    <table class="table tabel_cos">
+      <thead class="thead_cos">
+        <tr>
+          <th>
+            Sumar comanda
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Va rugam sa verificati cosul dumneavoastra inainte de a plasa comanda.
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">Subtotal: <strong>{{total}} lei</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mx-auto">
+      <form class="" action="" method="POST">
+          {% csrf_token %}
+          <script src="https://checkout.stripe.com/checkout.js"
+          class="stripe-button"
+          data-key="{{ data_key }}"
+          data-name="Magazin Online"
+          data-description="{{ descriere }}"
+          data-shipping-address = "true"
+          data-biling-address = "true"
+          data-zip-code = "true"
+          data-amount="{{ stripe_total }}"
+          data-currency="lei">
+          </script>
+      </form>
+      <a href="{% url 'acasa' %}" style="text-decoration: none">
+        <button type="button" class="text-white btn btn-lg bg-dark btn-block" name="button">
+          Continuati cumparaturile
+        </button>
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+  {% endif %}
+{% endblock %}

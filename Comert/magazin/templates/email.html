@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Comanda cu numarul #{{ comanda_plasata.id }} - Magazin Online</title>
+		<style>
+			table {
+				width: 60%;
+				margin: 0 auto;
+				border-collapse: collapse;
+			}
+			table tr td {
+				border: 1px solid #c1c1c1;
+			}
+			p {
+				padding-right: 50px;
+				padding-left: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<center>
+			<h1>Va multumim pentru ca ati ales produsele si serviciile noastre!</h1>
+			<p>Acest email este pentru a confirma faptul ca ati plasat o comanda la Magazin Online.<br>Va rugam sa va asigurati ca toate detaliile referitoare la adresa sunt complete si corecte.</p>
+		</center>
+		<br>
+		<table>
+			<tr>
+				<td valign="top" colspan="2" style="width: 50%;">
+					<b>Detalii facturare:</b><br>
+					 {{ comanda_plasata.numeFacturare }}<br>
+					 {{ comanda_plasata.adresaFacturare }}<br>
+					 {{ comanda_plasata.orasFacturare }}<br>
+					 {{ comanda_plasata.codPostalFacturare }}<br>
+					 {{ comanda_plasata.taraFacturare }}<br>
+				</td>
+				<td valign="top" colspan="2" style="width: 50%;">
+					<b>Comanda: </b>#{{ comanda_plasata.id }}<br>
+					<b>Data si ora: </b>{{ comanda_plasata.creata }}
+				</td>
+			</tr>
+			<tr>
+				<td><b>Produs</b></td>
+				<td><b>Cantitate</b></td>
+				<td><b>Pret pe unitate</b></td>
+				<td><b>Total:</b></td>
+			</tr>
+			{% for obiect in obiecte_comanda %}
+			<tr>
+				<td>{{ obiect.produs }}</td>
+				<td>{{ obiect.cantitate }}</td>
+				<td>{{ obiect.pret }} lei</td>
+				<td>{{ obiect.sub_total }} lei</td>
+			</tr>
+			{% endfor %}
+				<td colspan="3" style="text-align: right;"><b>Suma totala achitata:</b></td>
+				<td>{{ comanda_plasata.total }} lei</td>
+			<tr>
+				<td valign="top" colspan="2" style="width: 50%;">
+					<b>Detalii livrare:</b><br>
+					{{ comanda_plasata.numeLivrare }}<br>
+					{{ comanda_plasata.adresaLivrare }}<br>
+					{{ comanda_plasata.orasLivrare }}<br>
+					{{ comanda_plasata.codPostalLivrare }}<br>
+					{{ comanda_plasata.taraLivrare }}<br>
+				</td>
+				<td valign="top" colspan="2" style="width: 50%;">
+					<b>Detalii plata:</b><br>
+					Comanda in valoare de {{ comanda_plasata.total }} lei, a fost platita cu succes cu cardul dumneavoastra.
+				</td>
+			</tr>
+		</table>
+		<center>
+			<br>
+			<p>Daca sunteti un client inregistrat si doriti sa verificati istoricul
+        comenzilor, va rugam <a href="http://192.168.0.172:8000{% url 'autentificare' %}">autentificati-va</a>.
+        <br>In caz contrar <a href="http://192.168.0.172:8000{% url 'inregistrare' %}">inregistrati-va</a>
+        pentru a va crea un cont nou alaturi de noi.</p>
+		</center>
+	</body>
+</html>

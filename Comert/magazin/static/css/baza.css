@@ -1,0 +1,68 @@
+body {
+  margin-bottom: 50px;
+  background: #F5F5F5;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  padding-bottom:160px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.titlu_produs{
+  font-size: 35px;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  padding-top: 34px;
+  padding-bottom: 9px;
+}
+
+.descriere_produs{
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+}
+
+.text_produs{
+  padding-right: 30px;
+}
+
+.navbar {
+    background-color: #D81921;
+    height: 85px;
+}
+
+.navbar-nav>li{
+  border-right: 2px solid #000 !important;
+}
+
+.navbar-nav>li:last-child{
+   border: none !important;
+}
+
+li a:hover:not(.active) {
+  background-color: #ff3333;
+}
+
+.titlu_barnav{
+  font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+.baranav_centru {
+  position: relative;
+  left: 40%;
+  transform: translatex(-50%);
+}
+
+.despre {
+  padding: 50px;
+  text-align: center;
+  background-color: #303030;
+  color: white;
+}

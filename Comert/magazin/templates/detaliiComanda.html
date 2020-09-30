@@ -1,0 +1,68 @@
+{% extends 'baza.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Detalii comanda
+{% endblock %}
+{% block content %}
+    <div class="text-center">
+      <br>
+      <h1 class="titlu_produs text-center">Detalii comanda</h1>
+      <br>
+      <table class="table table-bordered">
+        <tr>
+          <td class="text-left" colspan="2">
+            <b>Comanda:</b> {{ comanda.id }} <br>
+            <b>Data si ora: </b>{{ comanda.creata }} <br>
+            <b>Suma totala a comenzii: </b>{{ comanda.total }} <br>
+            <b>Statusul comenzii: </b>Confirmata &nbsp;<i class="fas fa-check"></i>
+          </td>
+          <td class="text-left" colspan="2">
+            <b>Detalii facturare: </b> <br>
+            {{ comanda.numeFacturare }} <br>
+            {{ comanda.adresaFacturare }} <br>
+            {{ comanda.orasFacturare }} <br>
+            {{ comanda.codPostalFacturare }} <br>
+            {{ comanda.taraFacturare }} <br>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Descrierea produsului</b></td>
+          <td><b>Cantitate</b></td>
+          <td><b>Pret</b></td>
+          <td><b>Total</b></td>
+        </tr>
+        {% for obiect in obiecte_comanda %}
+          <tr>
+            <td>{{ obiect.produs }}</td>
+            <td>{{ obiect.cantitate }}</td>
+            <td>{{ obiect.pret }}lei</td>
+            <td>{{ obiect.sub_total }}lei</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td class="text-right" colspan="3"><b>Suma totala achitata:</b></td>
+          <td>{{ comanda.total }}</td>
+        </tr>
+        <tr>
+          <td class="text-left" colspan="2">
+            <b>Detalii livrare:</b> <br>
+            {{ comanda.numeLivrare }} <br>
+            {{ comanda.adresaLivrare }} <br>
+            {{ comanda.orasLivrare }} <br>
+            {{ comanda.codPostalLivrare }} <br>
+            {{ comanda.taraLivrare }} <br>
+          </td>
+          <td class="text-left" colspan="2">
+            <b>Detalii plata:</b> <br>
+            Comanda cu numarul {{ comanda.id }} a fost platita cu succes.
+          </td>
+        </tr>
+      </table>
+      <button class="btn btn-secondary" onclick="window.print();">
+        <i class="fas fa-print"></i>
+        Afiseaza comanda
+      </button>
+    </div>
+    <br><br>
+{% endblock %}
