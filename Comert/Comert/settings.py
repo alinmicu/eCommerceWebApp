@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v7(vh6x3t(i$rrx#rg$g#hd!1394&n+gw^u75catyswt@c-36$'
+SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -128,9 +128,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 EMAIL_HOST_USER = 'postmaster@email.testmagazinonline.site'
-EMAIL_HOST_PASSWORD = '450161a3acbf82250a22f41ab7007f57-203ef6d0-d23b807e'
+EMAIL_HOST_PASSWORD = 'Your Pass'
 EMAIL_HOST = 'smtp.eu.mailgun.org'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51HGllHCZStBSXH1DI8iN7gS1OCnRL4G7dZ7E0pjtUzbBYTiJOuUX9I6vbrFf5pG0aV4bRXQ37XvqDlh5XP0iuyNn0021KtZqj0'
-STRIPE_SECRET_KEY = 'sk_test_51HGllHCZStBSXH1D27CQnja6VOCmFn6B5whuHwsYCEAcEZXVRhcCnquPui2yO0exEtJ7KB2rmsKmwZLYvT30kVlo00UGrLFwk4'
+STRIPE_PUBLISHABLE_KEY = 'Your Key'
+STRIPE_SECRET_KEY = 'Your Key'
